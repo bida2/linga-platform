@@ -19,10 +19,10 @@ spring.datasource.password= <парола за вход във вашата ба
 За да създадете успешно и тестовите потребители (администратор и нормален потребител), трябва да добавите и следното към application.properties:
 
 ```
-fw.normal.user.username=<потребителско име на нормален потребител>
-fw.normal.user.password=<парола на нормален потребител>
-fw.normal.user.email=<е-мейл адрес на нормален потребител>
-fw.admin.user.username=<потребителско име на администратор>
-fw.admin.user.password=<парола на администратор>
-fw.admin.user.email=<е-мейл адрес на администратор>
+fw.normal.user.username= <потребителско име на нормален потребител>
+fw.normal.user.password= <парола на нормален потребител>
+fw.normal.user.email= <е-мейл адрес на нормален потребител>
+fw.admin.user.username= <потребителско име на администратор>
+fw.admin.user.password= <парола на администратор>
+fw.admin.user.email= <е-мейл адрес на администратор>
 ```
