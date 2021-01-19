@@ -32,3 +32,4 @@ build/
 
 ## Credentials ##
 application.properties
+.dbeaver-data-sources.xml
