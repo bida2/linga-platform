@@ -7,7 +7,7 @@
 
 # Как да пуснем проекта?
 
-За тази цел, трябва да го импортирате в IDE като Eclipse или IntelliJ. След това трябва да създадете application.properties файл, в който да добавите следните key-value properties:
+За тази цел, трябва да го импортирате в IDE като Eclipse или IntelliJ. След това трябва да създадете application.properties файл в src/main/resources папката, в който да добавите следните key-value properties:
 
 ```
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
