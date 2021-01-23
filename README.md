@@ -11,9 +11,9 @@
 
 ```
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-spring.datasource.url= <url до вашата база от данни>
-spring.datasource.username= <потребителско име за вход на вашата база от данни>
-spring.datasource.password= <парола за вход във вашата база от данни>
+spring.datasource.url= <url до вашата PostgreSQL база от данни>
+spring.datasource.username= <потребителско име за вход на вашата PostgreSQL база от данни>
+spring.datasource.password= <парола за вход във вашата PostgreSQL база от данни>
 ```
 
 За да създадете успешно и тестовите потребители (администратор и нормален потребител), трябва да добавите и следното към application.properties:
