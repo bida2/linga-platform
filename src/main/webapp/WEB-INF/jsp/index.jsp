@@ -12,7 +12,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>LinGA</title>
+    <title>ЛинГА</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -112,7 +112,7 @@
                         <input type="text" class="ml-xl-auto mx-xl-0 mx-auto form-control" name="wordSearch" placeholder="Въведете думата си тук..."> <hr class="d-block d-xl-none force-break"> <input type="submit" class="ml-xl-2 mr-xl-auto mx-xl-0 mt-2 mt-xl-0 mx-auto btn btn-primary" name="wordSubmit" value="Търси"> <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     </form>
                     <c:if test="${!words.isEmpty()}">
-                            <h3 class="${empty randWords ? 'd-none' : ''} mt-3 mb-3 text-center">Случайни думи</h3>
+                            <h3 class="${empty isRandom ? 'd-none' : ''} mt-3 mb-3 text-center">Случайни думи</h3>
                             <div class="${not empty words ? 'mt-4' : '' } alert alert-warning alert-dismissible init-height-alert alert-transition" role="alert">
                                 <strong>Все още се възпроизвежда звук - моля, изчакайте!</strong>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -130,10 +130,11 @@
                             <div class="col border font-weight-bold align-center-vertically">
                                 Пример с изречение</div>
                         </div> -->
+                        <c:if test="${not empty words}">
                         <div class="${not empty param.wordSubmit ? 'mt-4' : ''} card">
-                            <div class="table-responsive">
+                                    <div class="table-responsive">
                                 <table class="table table-hover table-bordered card-table-bottom-margin">
-                                    <thead>
+                                     <thead>
                                         <tr>
                                             <th class="th-min-width table-header-thickness bg-primary text-light align-middle">Дума, изписана на български</th>
                                             <th class="th-min-width table-header-thickness bg-primary text-light align-middle">Значение на думата</th>
@@ -141,7 +142,6 @@
                                             <th class="th-min-width table-header-thickness bg-primary text-light align-middle">Пример с изречение</th>
                                         </tr>
                                     </thead>
-                                    <c:if test="${not empty param.wordSubmit}">
                                         <c:forEach var="word" items="${words}">
                                             <tr>
                                                 <td>
@@ -158,46 +158,14 @@
                                                 </td>
                                             </tr>
                                         </c:forEach>
-                                        <c:if test="${words.isEmpty()}">
-                                            <p class="mt-3">
-                                                Не можахме да намерим '<span class="text-danger font-weight-bold">${param.wordSearch}</span>'!
-                                            </p>
-                                        </c:if>
+                                         </table>
+                                        </div>
+                                        </div>
                                     </c:if>
-                                    <c:if test="${!randWords.isEmpty()}">
-                                        <tbody>
-                                            <c:forEach var="randWord" items="${randWords}">
-                                                <!-- <div class="row border-left border-right border-bottom border-primary bg-light round-border-rows-bottom">
-                                <div class="col border-right border-primary align-center-vertically pt-2 pb-2" >
-                                    <p>${randWord.getWord()}<sup><i class="ml-1" data-feather="help-circle" data-toggle="popover" data-content="${randWord.getAltSpellings().isEmpty() == false ? String.join(',', randWord.getAltSpellings()) : 'Няма други изписвания засега!'}" data-title="Други изписвания" data-trigger="hover"></i></sup></p> 
-                                   </div>
-                                <div class="col border-right border-primary align-center-vertically pt-2 pb-2">
-                                    ${randWord.getMeaning()}</div>
-                                <div class="col border-right border-primary align-center-vertically pt-2 pb-2">
-                                    <span class="d-none spelling">${randWord.getSpelling()}</span> <span class="pronounce btn btn-outline-primary btn-outline-trans pointer"><i data-feather="mic"></i> ${randWord.getSpelling()}</span>
-                                </div>
-                                <div class="col align-center-vertically pt-2 pb-2">${randWord.getExampleSent()}</div>
-                            </div> -->
-                                                <tr>
-                                                    <td>
-                                                        ${randWord.getWord()}<sup><i class="ml-1 popovers" data-feather="help-circle" data-toggle="popover" tabindex="0" role="button" data-trigger="focus" data-content="${randWord.getAltSpellings().isEmpty() == false ? String.join(',', randWord.getAltSpellings()) : 'Няма други изписвания засега!'}" data-title="Други изписвания" data-placement="bottom"></i></sup>
-                                                    </td>
-                                                    <td>
-                                                        ${randWord.getMeaning()}
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <span class="d-none spelling">${randWord.getSpelling()}</span> <span class="pronounce btn btn-outline-primary btn-outline-trans pointer"><i data-feather="mic"></i> ${randWord.getSpelling()}</span>
-                                                    </td>
-                                                    <td>
-                                                        ${randWord.getExampleSent()}
-                                                    </td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                </table>
-                            </div>
-                        </div>
+             
                     </c:if>
+                    <c:if test="${not empty noWordsFound}">
+                    	<p class="font-weight-bold text-danger">${noWordsFound}</p>
                     </c:if>
                     <!-- Place a condition here, that will render a list of random word suggestions
 				on page load  -->

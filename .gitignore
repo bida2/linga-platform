@@ -30,6 +30,6 @@ build/
 ### VS Code ###
 .vscode/
 
-## Credentials ##
+### Credentials ###
 application.properties
 .dbeaver-data-sources.xml

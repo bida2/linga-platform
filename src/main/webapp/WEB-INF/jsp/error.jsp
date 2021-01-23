@@ -12,7 +12,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Error - LinGA</title>
+    <title>ЛинГА - Нещо се обърка!</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -22,10 +22,10 @@
 <body>
 
     <main class="text-center mt-3">
-    	<h1>Oops! It seems there is an error!</h1>
-    	<h4>${errorDesc }</h4>
+    	<h1>Нещо се обърка при заявката Ви до сървъра!</h1>
+    	<h4>${errorDesc}</h4>
     	
-    	<a href="/">Click here to go back to our homepage</a>
+    	<a href="/" class="btn btn-primary">Обратно към заглавната страница</a>
     </main>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

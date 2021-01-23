@@ -70,7 +70,8 @@ public class MainController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcome(Model model) {
 		List<Word> randWords = wordRepo.getRandomWords(3);
-		model.addAttribute("randWords", randWords);
+		model.addAttribute("words", randWords);
+		model.addAttribute("isRandom", true);
 		return "index";
 	}
 	
@@ -215,7 +216,11 @@ public class MainController {
 	public String welcomePost(@RequestParam("wordSearch") String word,Model model) throws InterruptedException {
 		// Does a Hibernate Search search on the indexed field "word" in the Word entity class
 		List<Word> words = wordSearch.searchByWord(word);
-		model.addAttribute("words", words);
+		if (words.size() == 0) {
+			model.addAttribute("noWordsFound", "Няма намерени думи, съдържащи " + "\"" + word + "\"");
+		} else {
+			model.addAttribute("words", words);
+		}
 		return "index";
 	}
 	
