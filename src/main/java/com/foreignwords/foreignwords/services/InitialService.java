@@ -48,7 +48,7 @@ public class InitialService {
 	public void init() {
 		// If the admin user has been created in DB, then this method should not be fully executed
 		try {
-		User testUser = userRepo.findByUsername("keloman").get();
+		User testUser = userRepo.findByUsername(env.getProperty("fw.admin.user.username")).get();
 		if (testUser != null) {
 			return;
 		} } catch (NoSuchElementException e) {

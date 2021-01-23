@@ -45,9 +45,6 @@ public class HTTPAccessConfig extends WebSecurityConfigurerAdapter implements We
 	  
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
-	    	// In the future, /addStock will require login. For testing purposes now it is excluded from the list of pages 
-	    	// that require login
-	    	// A logged in user cannot access the /signup URL -> he must log out and then try to signup
 	    	http.authorizeRequests().antMatchers("/","/login","/css/**","/js/**","/img/**", "/h2-console/**", "/forgot", "/changePassword", "/logout").permitAll()
 	    	.and()
 	    	.authorizeRequests().antMatchers("/wordUser").hasRole("USER")
@@ -65,9 +62,6 @@ public class HTTPAccessConfig extends WebSecurityConfigurerAdapter implements We
         .logout()
         .logoutSuccessUrl("/")
             .permitAll();
-	    	/* H2 Console only settings - disable otherwise */
-	    	//http.csrf().disable();
-	    	// http.headers().frameOptions().disable();
 	    }
 
 	    @Autowired
