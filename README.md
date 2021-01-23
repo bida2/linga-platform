@@ -7,13 +7,13 @@
 
 # Как да пуснем проекта?
 
-За тази цел, трябва да го импортирате в IDE като Eclipse или IntelliJ. След това трябва да създадете application.properties файл, в който да добавите следните key-value properties:
+За тази цел, трябва да го импортирате в IDE като Eclipse или IntelliJ. След това трябва да създадете application.properties файл в src/main/resources папката, в който да добавите следните key-value properties:
 
 ```
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-spring.datasource.url= <url до вашата база от данни>
-spring.datasource.username= <потребителско име за вход на вашата база от данни>
-spring.datasource.password= <парола за вход във вашата база от данни>
+spring.datasource.url= <url до вашата PostgreSQL база от данни>
+spring.datasource.username= <потребителско име за вход на вашата PostgreSQL база от данни>
+spring.datasource.password= <парола за вход във вашата PostgreSQL база от данни>
 ```
 
 За да създадете успешно и тестовите потребители (администратор и нормален потребител), трябва да добавите и следното към application.properties:
@@ -26,3 +26,5 @@ fw.admin.user.username= <потребителско име на админист
 fw.admin.user.password= <парола на администратор>
 fw.admin.user.email= <е-мейл адрес на администратор>
 ```
+
+**Хостната версия на проекта за демонстрационни цели може да бъде видяна на https://foreign-words-bg.herokuapp.com/ - ВНИМАНИЕ - Тъй като използвам безплатна версия на Heroku, при първоначално зареждане може да изпитате забавяне от 30 секунди до минута при зареждане - това е нормално, тъй като виртуалната машина "заспива" при 30 минути липса на какъвто и да е трафик.**
