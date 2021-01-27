@@ -37,6 +37,7 @@ import com.foreignwords.foreignwords.repositories.WordSearchRepository;
 import com.foreignwords.foreignwords.services.EmailService;
 import com.foreignwords.foreignwords.services.UserService;
 import com.foreignwords.foreignwords.validations.CredentialsValidation;
+import com.foreignwords.foreignwords.validations.WordValidation;
 
 @Controller
 public class MainController {
@@ -83,11 +84,11 @@ public class MainController {
 	
 	@RequestMapping(value = "/wordUser", method = RequestMethod.POST)
 	public String addWordUserPost(Model model,@ModelAttribute("wordNew") UnapprovedWord word,BindingResult result) {
-		if (!result.hasErrors()) {
-			model.addAttribute("successMessage", "Успешно добавихте дума - трябва да бъде удобрена от администратора, за да се добави официално!");
-		} else {
+		if (!WordValidation.containsOnlyBgPlusSpecialChars(word.getMeaning()) || !WordValidation.containsOnlyBgPlusSpecialChars(word.getExampleSent())) {
 			model.addAttribute("errorMessage", "Неуспешно добавяне на дума!");
 			return "wordUser";
+		} else {
+			model.addAttribute("successMessage", "Успешно добавихте дума - трябва да бъде удобрена от администратора, за да се добави официално!");
 		}
 		unapprovedWordRepo.save(word);
 		model.addAttribute("wordNew", new UnapprovedWord());
@@ -107,14 +108,41 @@ public class MainController {
 		return "signup";
 	}
 	
+	@RequestMapping(value = "/changeSuggestion", method = RequestMethod.GET)
+	public String editWord(Model model, @RequestParam("sId") long sId) {
+		UnapprovedWord suggWord = unapprovedWordRepo.getOne(sId);
+		model.addAttribute("word", suggWord);
+		return "changeSuggestedWord";
+	}
 	
+	@RequestMapping(value = "/changeSuggestion", method = RequestMethod.POST)
+	public String editWordSubmit(Model model, HttpServletRequest request, @RequestParam("sId") long sId) {
+		UnapprovedWord suggWord = unapprovedWordRepo.getOne(sId);
+		if (!WordValidation.containsOnlyBgPlusSpecialChars(request.getParameter("word")) || !WordValidation.containsOnlyBgPlusSpecialChars(request.getParameter("exampleSent"))) {
+			model.addAttribute("errorMessage", "Невалидни символи във въведената информация!");
+			return "changeSuggestedWord";
+		}
+		suggWord.setWord(request.getParameter("word"));
+		suggWord.setExampleSent(request.getParameter("exampleSent"));
+		suggWord.setMeaning(request.getParameter("meaning"));
+		suggWord.setSpelling(request.getParameter("spelling"));
+		Set<String> spellingsNew = new HashSet<String>();
+		for (String spelling : request.getParameterValues("altSpellings")) {
+			spellingsNew.add(spelling);
+		}
+		suggWord.setAltSpellings(spellingsNew);
+		unapprovedWordRepo.save(suggWord);
+		model.addAttribute("word", suggWord);
+		model.addAttribute("successMessage", "Успешно променихте предложението за дума!");
+		return "changeSuggestedWord";
+	}
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signupPost(Model model,@ModelAttribute("userNew") User user,BindingResult result) {
 		if (userRepo.findByUsername(user.getUsername()).isPresent() || userRepo.findByEmail(user.getEmail()).isPresent()) {
 			throw new UsernameOrEmailExistsException("Съществува потребител с това потребителско име или е-мейл адрес!");
 		}
-		if (result.hasErrors() || !CredentialsValidation.isUsernameValid(user.getUsername()) 
+		if (!CredentialsValidation.isUsernameValid(user.getUsername()) 
 				|| !CredentialsValidation.isPasswordValid(user.getPassword())
 				|| !CredentialsValidation.isEmailValid(user.getEmail())
 				|| !CredentialsValidation.doPasswordsMatch(user.getPassword(), user.getPasswordConfirm())) {
@@ -156,6 +184,10 @@ public class MainController {
 	
 	@RequestMapping(value = "/word", method = RequestMethod.POST)
 	public String addWordAdminPost(Model model,@ModelAttribute("wordNew") Word word,BindingResult result) {
+		if (!WordValidation.containsOnlyBgPlusSpecialChars(word.getMeaning()) || !WordValidation.containsOnlyBgPlusSpecialChars(word.getExampleSent())) {
+			model.addAttribute("errorMessage", "Невалидни символи във въведените данни!");
+			return "word";
+		}
 		try {
 			wordRepo.save(word);
 		} catch (DataIntegrityViolationException e) {

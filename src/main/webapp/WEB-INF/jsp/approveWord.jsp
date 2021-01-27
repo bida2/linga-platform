@@ -171,10 +171,11 @@
                             <h5 class="modal-title"> Действия </h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
                         </div>
                         <div class="modal-body">
-                           <form id="approveForm" class="d-inline-block" method="POST" action="/approve?wId="> <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <button type="submit" class="btn btn-primary pointer"><i data-feather="check"></i> Одобри</button>
+                           <form id="approveForm" class="d-inline-block" method="POST" action="/approve?wId="> <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <button type="submit" class="btn btn-success pointer"><i data-feather="check"></i> Одобри</button>
                            </form>
                            <form id="disapproveForm" class="d-inline-block"  method="POST" action="/disapprove?wId="> <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <button type="submit" class="btn btn-danger pointer"><i data-feather="x"></i> Отхвърли</button>
                            </form>
+                         	<a id="changeForm" href="/changeSuggestion" class="d-inline-block btn pointer btn-primary"><i data-feather="edit"></i> Промени</a>
                         </div>
                         <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal"> Затвори </button> </div>
                     </div>
@@ -192,6 +193,7 @@
     	  var $invoker = $(e.relatedTarget);
 $('#approveForm').attr("action", "/approve?wId=" + $invoker[0].dataset.wordId);
 $('#disapproveForm').attr("action", "/disapprove?wId=" + $invoker[0].dataset.wordId);
+$('#changeForm').attr("href", "/changeSuggestion?sId=" + $invoker[0].dataset.wordId);
     	});
      </script>
     <script>

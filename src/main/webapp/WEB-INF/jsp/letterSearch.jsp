@@ -144,17 +144,6 @@
                                     <c:if test="${!words.isEmpty()}">
                                         <tbody>
                                             <c:forEach var="word" items="${words}">
-                                                <!-- <div class="row border-left border-right border-bottom border-primary bg-light round-border-rows-bottom">
-                                <div class="col border-right border-primary align-center-vertically pt-2 pb-2" >
-                                    <p>${randWord.getWord()}<sup><i class="ml-1" data-feather="help-circle" data-toggle="popover" data-content="${randWord.getAltSpellings().isEmpty() == false ? String.join(',', randWord.getAltSpellings()) : 'Няма други изписвания засега!'}" data-title="Други изписвания" data-trigger="hover"></i></sup></p> 
-                                   </div>
-                                <div class="col border-right border-primary align-center-vertically pt-2 pb-2">
-                                    ${randWord.getMeaning()}</div>
-                                <div class="col border-right border-primary align-center-vertically pt-2 pb-2">
-                                    <span class="d-none spelling">${randWord.getSpelling()}</span> <span class="pronounce btn btn-outline-primary btn-outline-trans pointer"><i data-feather="mic"></i> ${randWord.getSpelling()}</span>
-                                </div>
-                                <div class="col align-center-vertically pt-2 pb-2">${randWord.getExampleSent()}</div>
-                            </div> -->
                                                 <tr>
                                                     <td>
                                                          ${word.getWord()}<sup><i class="ml-1 popovers" data-feather="help-circle" data-placement="bottom" data-toggle="popover" tabindex="0" role="button" data-trigger="focus" data-content="${word.getAltSpellings().isEmpty() == false ? String.join(',', word.getAltSpellings()) : 'Няма други изписвания засега!'}" data-title="Други изписвания"></i></sup>
@@ -174,6 +163,9 @@
                                 </table>
                             </div>
                             </c:if>
+                            </c:if>
+                            <c:if test="${empty words || words.isEmpty()}"> 
+                            	<p class="font-weight-bold text-danger">Няма намерени думи, започващи с '${param.letter}'!</p>
                             </c:if>
 			</div>
 		</div>

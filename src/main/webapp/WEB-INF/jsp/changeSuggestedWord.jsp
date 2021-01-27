@@ -3,26 +3,23 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <sec:authorize var="isAdmin" access="hasRole('ADMIN')"></sec:authorize>
 <html lang="en">
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>ЛинГА - Добави дума</title>
-<!-- Bootstrap CSS -->
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="css/main.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>ЛинГА - Промени дума</title>
+    <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-	 <header>
+      <header>
         <nav class="navbar navbar-extra navbar-light bg-light">
             <a class="navbar-brand ml-1 mt-2 mx-auto" href="/"> <img class="img-fluid" src="images/logo-test.png">
             </a>
@@ -54,11 +51,11 @@
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
                         <i data-feather="log-in"></i><span class="d-none d-sm-inline">Вход</span>
                     </button>
-                   
+              
                 </div>
-                 <!-- Login through a modal - used to avoid resizing issues on mobile -->
+                      <!-- Login through a modal - used to avoid resizing issues on mobile -->
                     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLongTitle">Вход в системата</h5>
@@ -98,50 +95,46 @@
             </c:if>
         </nav>
     </header>
-	<main>
-	<div class="container">
-		<div class="row text-center ">
-			<div class="col mt-3">
-				<h3>Добавете чужда дума</h3>
-				<form:form method="POST" action="/wordUser" modelAttribute="wordNew"
-					class="form-group">
-					<form:input type="text" oninvalid="setCustomValidity('Може да въведете само кирилица тук!')"
-    onchange="try{setCustomValidity('')}catch(e){}" pattern='[\u0400-\u04FF ]+' class="mt-2 form-control" name="word"
-						placeholder="Думата, изписана на български" path="word" />
-					<br>
-					<form:input 
-     type="text" class="mt-2 form-control" name="meaning" oninvalid="setCustomValidity('Само кирилица плюс символите \",\" , \";\" , \"!\" тук!')"
-    onchange="try{setCustomValidity('')}catch(e){}" pattern='[\u0400-\u04FF ,;!]+'
-						placeholder="Значение на думата на български" path="meaning" />
-					<br>
-					<form:input type="text" class="mt-2 form-control" name="spelling" oninvalid="setCustomValidity('Може да въведете само латиница тук!')"
-    onchange="try{setCustomValidity('')}catch(e){}" pattern='[A-Za-z ]+'
-						placeholder="Изписване на чужд език" path="spelling" />
-					<br>
-					<form:input 
-     type="text" class="mt-2 form-control" oninvalid="setCustomValidity('Само кирилица плюс символите \",\" , \";\" , \"!\" тук!')"
-    onchange="try{setCustomValidity('')}catch(e){}" pattern='[\u0400-\u04FF ,;!]+'
-						name="exampleSent" placeholder="Примерно изречение с думата"
-						path="exampleSent" />
-					<br>
-	<form:input id="cloneThis" type="text" oninvalid="setCustomValidity('Може да въведете само кирилица тук!')"
-    onchange="try{setCustomValidity('')}catch(e){}" pattern='[\u0400-\u04FF]+' class="mt-2 form-control d-inline-block mx-auto" name="altSpellings" placeholder="Друго изписване на български" path="altSpellings"/><button type="button" onclick="addInput('#cloneThis','#insertAfter')" class="btn btn-success btn-sm mt-n1 ml-3 mr-n5 btn-circle"><i data-feather="plus-circle"></i></button>
+     <main>
+     	<div class="container">
+     		<div class="row text-center ">
+     			<div class="col mt-3">
+     			<form class="form-group" action="/changeSuggestion?sId=${param.sId}" method="POST">
+     					<input type="text" class="mt-2 form-control" name="word" oninvalid="setCustomValidity('Може да въведете само кирилица тук!')"
+    onchange="try{setCustomValidity('')}catch(e){}" pattern='[\u0400-\u04FF ]+' value="${word.word}" placeholder="Думата, изписана на български"/>
+     					<br>
+     					<input type="text" class="mt-2 form-control" name="meaning" oninvalid="setCustomValidity('Само кирилица плюс символите \",\" , \";\" , \"!\" тук!')"
+    onchange="try{setCustomValidity('')}catch(e){}" pattern='[\u0400-\u04FF ,;!]+' value="${word.meaning }" placeholder="Значение на думата на български"/>
+     					<br>
+     					<input type="text" class="mt-2 form-control" oninvalid="setCustomValidity('Може да въведете само латиница тук!')"
+    onchange="try{setCustomValidity('')}catch(e){}" pattern='[A-Za-z ]+' name="spelling" value="${word.spelling }"  placeholder="Изписване на чужд език"/>
+     					<br>
+     					<input type="text" class="mt-2 form-control" name="exampleSent" oninvalid="setCustomValidity('Само кирилица плюс символите \",\" , \";\" , \"!\" тук!')"
+    onchange="try{setCustomValidity('')}catch(e){}" pattern='[\u0400-\u04FF ,;!]+' placeholder="Примерно изречение с думата" value="${word.exampleSent}"/>
+     					<br>
+     					<c:if test="${!word.altSpellings.isEmpty()}">
+     						<c:forEach var="altSpelling" items="${word.altSpellings}">
+     					<input type="text" class="mt-2 form-control" name="altSpellings" oninvalid="setCustomValidity('Може да въведете само кирилица тук!')"
+    onchange="try{setCustomValidity('')}catch(e){}" pattern='[\u0400-\u04FF ]+' placeholder="Друго изписване на български" value="${altSpelling}">
+    						<br>
+    					</c:forEach>
+     					</c:if>
+     					<input id="cloneThis" type="text" class="mt-2 form-control" oninvalid="setCustomValidity('Може да въведете само кирилица тук!')"
+    onchange="try{setCustomValidity('')}catch(e){}" pattern='[\u0400-\u04FF]+' name="altSpellings" placeholder="Друго изписване на български"/><button type="button" onclick="addInput('#cloneThis','#insertAfter')" class="btn btn-success btn-sm mt-n1 ml-3 mr-n5 btn-circle"><i data-feather="plus-circle"></i></button>
      					<br id="insertAfter">
-					<input type="submit" class="mt-2 ml-2 btn btn-primary"
-						name="wordAddition" value="Добави">
-					<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" />
-				</form:form>
-			</div>
-		</div>
-	</div>
-	<div id="statusReport" class="d-none mt-2 text-center">
+     					<input type="submit" class="mt-2 ml-2 btn btn-primary" name="wordChange" value="Промени">
+     				 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+     			</form>
+    </div>
+  </div>
+</div>
+<div id="statusReport" class="d-none mt-2 text-center">
 		<div id="modalId" class="modal" tabindex="-1" role="dialog">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">
-							Статус на добавяне
+							Статус на промяна
 						</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
@@ -161,20 +154,18 @@
 			</div>
 		</div>
 	</div>
-	</main>
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-		crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-	<script src="js/voiceSynth.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g==" crossorigin="anonymous"></script>
-	<script>
+     </main>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="js/voiceSynth.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g==" crossorigin="anonymous"></script>
+    <script>
     	feather.replace();
     </script>
-	<script src="js/modalMessages.js"></script>
-	<script src="js/miscFunctions.js"></script>
+    <script src="js/modalMessages.js"></script>
+    <script src="js/miscFunctions.js"></script>
 </body>
 </html>

@@ -101,20 +101,20 @@
      			<div class="col mt-3">
      			<h3>Добавете чужда дума</h3>
      				<form:form method="POST" action="/word" modelAttribute="wordNew" class="form-group">
-     					<form:input type="text" class="mt-2 form-control" name="word" oninvalid="setCustomValidity('Може да въведете само български букви тук!')"
-    onchange="try{setCustomValidity('')}catch(e){}" pattern='[\u0400-\u04FF *]+' placeholder="Думата, изписана на български" path="word"/>
+     					<form:input type="text" class="mt-2 form-control" name="word" oninvalid="setCustomValidity('Може да въведете само кирилица тук!')"
+    onchange="try{setCustomValidity('')}catch(e){}" pattern='[\u0400-\u04FF ]+' placeholder="Думата, изписана на български" path="word"/>
      					<br>
-     					<form:input type="text" class="mt-2 form-control" name="meaning" oninvalid="setCustomValidity('Може да въведете само български букви тук!')"
-    onchange="try{setCustomValidity('')}catch(e){}" pattern='[\u0400-\u04FF *]+' placeholder="Значение на думата на български" path="meaning"/>
+     					<form:input type="text" class="mt-2 form-control" name="meaning" oninvalid="setCustomValidity('Само кирилица плюс символите \",\" , \";\" , \"!\" тук!')"
+    onchange="try{setCustomValidity('')}catch(e){}" pattern='[\u0400-\u04FF ,;!]+' placeholder="Значение на думата на български" path="meaning"/>
      					<br>
-     					<form:input type="text" class="mt-2 form-control" oninvalid="setCustomValidity('Може да въведете само английски букви тук!')"
-    onchange="try{setCustomValidity('')}catch(e){}" pattern='[A-Za-z *]+' name="spelling" placeholder="Изписване на чужд език" path="spelling"/>
+     					<form:input type="text" class="mt-2 form-control" oninvalid="setCustomValidity('Може да въведете само латиница тук!')"
+    onchange="try{setCustomValidity('')}catch(e){}" pattern='[A-Za-z ]+' name="spelling" placeholder="Изписване на чужд език" path="spelling"/>
      					<br>
-     					<form:input type="text" class="mt-2 form-control" name="exampleSent" oninvalid="setCustomValidity('Може да въведете само български букви тук!')"
-    onchange="try{setCustomValidity('')}catch(e){}" pattern='[\u0400-\u04FF *]+' placeholder="Примерно изречение с думата" path="exampleSent"/>
+     					<form:input type="text" class="mt-2 form-control" name="exampleSent" oninvalid="setCustomValidity('Само кирилица плюс символите \",\" , \";\" , \"!\" тук!')"
+    onchange="try{setCustomValidity('')}catch(e){}" pattern='[\u0400-\u04FF ,;!]+' placeholder="Примерно изречение с думата" path="exampleSent"/>
      					<br>
-     					<form:input id="cloneThis" type="text" class="mt-2 form-control d-inline-block mx-auto" oninvalid="setCustomValidity('Може да въведете само български букви тук!')"
-    onchange="try{setCustomValidity('')}catch(e){}" pattern='[\u0400-\u04FF *]+' name="altSpellings" placeholder="Друго изписване на български" path="altSpellings"/><button type="button" onclick="addInput('#cloneThis','#insertAfter')" class="btn btn-success btn-sm mt-n1 ml-3 mr-n5 btn-circle"><i data-feather="plus-circle"></i></button>
+     					<form:input id="cloneThis" type="text" class="mt-2 form-control d-inline-block mx-auto" oninvalid="setCustomValidity('Може да въведете само кирилица тук!')"
+    onchange="try{setCustomValidity('')}catch(e){}" pattern='[\u0400-\u04FF]+' name="altSpellings" placeholder="Друго изписване на български" path="altSpellings"/><button type="button" onclick="addInput('#cloneThis','#insertAfter')" class="btn btn-success btn-sm mt-n1 ml-3 mr-n5 btn-circle"><i data-feather="plus-circle"></i></button>
      					<br id="insertAfter">
      					<input type="submit" class="mt-2 ml-2 btn btn-primary" name="wordAddition" value="Добави">
      				 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

@@ -49,7 +49,7 @@ public class HTTPAccessConfig extends WebSecurityConfigurerAdapter implements We
 	    	.and()
 	    	.authorizeRequests().antMatchers("/wordUser").hasRole("USER")
 	    	.and()
-	    	.authorizeRequests().antMatchers("/word","/approve").hasRole("ADMIN")
+	    	.authorizeRequests().antMatchers("/word","/approve", "/changeSuggestion", "/disapprove").hasRole("ADMIN")
 	    	.and()
 	    	.formLogin()
             .loginPage("/login")
