@@ -345,10 +345,6 @@ public class MainController {
 	    }
 	    String token = UUID.randomUUID().toString();
 	    userService.createUserPasswordResetToken(user, token, Date.valueOf(LocalDate.now().plusDays(1l)));
-	   /* mailService.sendResetTokenEmail("petar.tonchev18@abv.bg", userEmail, "Dear " + user.getUsername() + 
-	    		",\n we would like to inform you that a password change has been requested for your account.\n Your reset link can be found below:\n" +
-	    		"<a href='" + request.getScheme() + "://" + request.getServerName() + ":" + request.getLocalPort() + "/changePassword?token=" + token + "'>Click here to reset your password!</a>");
-	   */
 	    mailService.sendResetTokenEmail("petar.tonchev18@abv.bg", userEmail, "Dear " + user.getUsername() + 
 	    		",\n we would like to inform you that a password change has been requested for your account.\n Your reset link can be found below:\n" +
 	    		"<a href='" + request.getScheme() + "://" + request.getServerName() + "/changePassword?token=" + token + "'>Click here to reset your password!</a>");
